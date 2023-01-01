@@ -129,10 +129,13 @@ class NetPlot():
         return ET.tostring(self.mxfile) 
 
     def exportXML(self, filePath):
-        with open(filePath,'wb') as file:
-            tree = ET.ElementTree(self.mxfile)
-            tree.write(file)
-        return
+        try:
+            with open(filePath,'wb') as file:
+                tree = ET.ElementTree(self.mxfile)
+                tree.write(file)
+            return
+        except Exception as e:
+            logging.error('Error in exporting XML file: {}'.format(e))
 
     def __repr__(self):
         return str(self.display_xml())
